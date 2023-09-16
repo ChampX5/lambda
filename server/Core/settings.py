@@ -7,6 +7,9 @@ from __config.credentials import(
     Database,
     Core
 )
+from .configration import (
+    APIConfiguration,
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     
-    "daphne",
+    "daphne",                       #async server
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'rest_framework',               #api framework
+    'rest_framework.authtoken',     #api authentication applciation
 ]
 
 ASGI_APPLICATION = "Core.asgi.application"
@@ -49,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'Core.urls'
 
@@ -86,6 +94,7 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = APIConfiguration.REST_FRAMEWORK
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
