@@ -69,7 +69,10 @@ class AuthenticationView(APIView):
                {
                     "auth_status":"success",
                     'user':{
-                         'Authentication':f'Token {auth_token}'
+                         'Authentication':f'Token {auth_token}',
+                         'username':f'{auth_user.get_username()}',
+                         'email':f'{auth_user.get_email_field_name()}',
+                         'first_name':f'{auth_user.first_name}'
                     }
                }
           )          
