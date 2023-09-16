@@ -6,7 +6,7 @@ class BaseAuthentication(TokenAuthentication):
 class APIConfiguration:
      REST_FRAMEWORK = {
           'DEFAULT_AUTHENTICATION_CLASSES': [
-               'Core.configuration.BaseAuthentication ',
+               'Core.configuration.BaseAuthentication',
           ],
           'DEFAULT_PERMISSION_CLASSES': [
                'rest_framework.permissions.AllowAny',
