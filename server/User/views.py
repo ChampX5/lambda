@@ -7,6 +7,21 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.db import IntegrityError
 
+'''
+-----------------------------------------------------------------------------------------Authentication-View-------------------------------------------------------------------------------------------------
+**URL["/server/user/auth/"] => returns the authentication token and credentials if valid 
+     :request:{
+          "username":... ,
+          "password":...
+     }(POST)
+     :response:
+          {"auth_status":"success","auth_data":{"auth_token":"Token ..."}}} -> authentication status successfull
+          {"auth_status":"exception""info":{...}}} -> database integrity error / other exceptions
+          {"auth_status":"denied"} -> authentication failed, onvalid credentials provided
+          
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'''
+
 class AuthenticationView(APIView):
      permission_classes = [AllowAny]
      
@@ -20,7 +35,7 @@ class AuthenticationView(APIView):
                return Response(
                     {
                          "auth_status":"excpetion",
-                         "details":{str(e)}
+                         "info":{str(e)}
                     }
                )
           
@@ -32,7 +47,7 @@ class AuthenticationView(APIView):
           )
           if(auth_user is None):
                return Response(
-                    {"auth_status":"invlaid",}
+                    {"auth_status":"denied",}
                )
           
           # deletion of pre-existing tokens that belongs to user
@@ -46,7 +61,7 @@ class AuthenticationView(APIView):
                return Response(
                     {
                          "auth_status":"excpetion",
-                         "details":{str(e)}
+                         "info":{str(e)}
                     }
                )
           
