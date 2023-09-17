@@ -19,13 +19,19 @@ from django.db import IntegrityError
           {"auth_status":"exception""info":{...}}} -> database integrity error / other exceptions
           {"auth_status":"denied"} -> authentication failed, onvalid credentials provided
           
+**URL["/server/user/auth/"] => returns the authentication token and credentials if valid 
+     :request:{}(GET)
+     :response:
+          {"auth_status":"authenticated"} -> user is authenticated status successfull
+          {"auth_status":"none"} -> no user is authenticated for the particular request          
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 '''
 
 class AuthenticationView(APIView):
+     
      permission_classes = [AllowAny]
      
-     def post(self,request:HttpRequest, *args, **kwargs):
+     def post(self,request:HttpRequest, *args, **kwargs)->Response:
           
           # extracting request data
           try:
@@ -75,4 +81,9 @@ class AuthenticationView(APIView):
                          'first_name':f'{auth_user.first_name}'
                     }
                }
-          )          
+          )  
+          
+     def get(self, request:HttpRequest, *args, **kwargs) ->Response:
+          if(request.user.is_authenticated):
+               return Response({"auth_status":"authenticated"})
+          return Response({"auth_status":"none"})
