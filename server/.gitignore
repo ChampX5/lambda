@@ -1,3 +1,4 @@
 __venv
 __config
 note.txt
+!__pycache__/*.*
