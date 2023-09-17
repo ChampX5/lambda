@@ -5,7 +5,6 @@ from rest_framework.authtoken.models import Token
 from django.http import HttpRequest
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.db import IntegrityError
 
 '''
 -----------------------------------------------------------------------------------------Authentication-View-------------------------------------------------------------------------------------------------
