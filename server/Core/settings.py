@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "corsheaders",                  #cross origin headers
     'rest_framework',               #api framework
     'rest_framework.authtoken',     #api authentication applciation
+    
+    'User',
 ]
 
 ASGI_APPLICATION = "Core.asgi.application"
@@ -60,7 +62,7 @@ MIDDLEWARE = [
 
 
 
-ROOT_URLCONF = 'Core.urls'
+ROOT_URLCONF = 'Core.routers.http'
 
 TEMPLATES = [
     {
@@ -85,16 +87,33 @@ WSGI_APPLICATION = 'Core.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'default':{
         'ENGINE': 'django.db.backends.mysql',
         'NAME': f'{Database.Defualt.DATABASE}',
         'PORT':f'{Database.Defualt.PORT}',
         'USER':f'{Database.Defualt.USERNAME}',
         'PASSWORD':f'{Database.Defualt.PASSWORD}',
         'HOST':f'{Database.Defualt.HOST}'
-        
+    },
+    'auth_primary': {                               #Primary shared database for users and authentication
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': f'{Database.Defualt.DATABASE}',
+        'PORT':f'{Database.Defualt.PORT}',
+        'USER':f'{Database.Defualt.USERNAME}',
+        'PASSWORD':f'{Database.Defualt.PASSWORD}',
+        'HOST':f'{Database.Defualt.HOST}'
+    },
+    'content': {                               #private database for apps in the primary server 
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': f'{Database.Content.DATABASE}',
+        'PORT':f'{Database.Content.PORT}',
+        'USER':f'{Database.Content.USERNAME}',
+        'PASSWORD':f'{Database.Content.PASSWORD}',
+        'HOST':f'{Database.Content.HOST}'
     }
 }
+
+DATABASE_ROUTERS = ["Core.routers.database.AuthRouter",]
 
 REST_FRAMEWORK = APIConfiguration.REST_FRAMEWORK
 
