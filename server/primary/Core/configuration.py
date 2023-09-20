@@ -16,5 +16,6 @@ class APIConfiguration:
 class Database:
      # stores the databases for routing to all selected apps
      PUBLIC_DATABASE_ACCESSES = [
-          'User',
+          'UserApp',
+          'admin'
      ]
