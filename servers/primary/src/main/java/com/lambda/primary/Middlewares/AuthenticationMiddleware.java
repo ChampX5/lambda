@@ -1,9 +1,7 @@
 package com.lambda.primary.Middlewares;
 
 
-import com.lambda.primary.Objects.Http.HttpUtils;
 import com.lambda.primary.Objects.Http.MutableHttpServletRequest;
-import com.lambda.primary.Objects.User.AnonymousUser;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,8 +37,7 @@ public class AuthenticationMiddleware implements Filter {
             //extracting the header from the header list
             String authHeader = httpRequest.getHeader("Authorization");
             if(authHeader==null){
-                AnonymousUser anonymousUser = new AnonymousUser(HttpUtils.getRequestIP(httpRequest));
-                httpRequest.setHeader("user",anonymousUser);
+                httpRequest.setHeader("user","-1");
                 filterChain.doFilter(
                         httpRequest,
                         servletResponse
