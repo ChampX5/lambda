@@ -8,19 +8,19 @@ import java.util.*;
 
 public class MutableHttpServletRequest extends HttpServletRequestWrapper {
 
-    private final Map<String, Object> customHeaders;
+    private final Map<String, String> customHeaders;
     public MutableHttpServletRequest(HttpServletRequest request) {
         super(request);
         customHeaders = new HashMap<>();
     }
 
-    public void setHeader(String key, Object value){
+    public void setHeader(String key, String value){
         customHeaders.put(key, value);
     }
 
 
-    public Object getHeaderObject(String name) {
-        Object header = customHeaders.get(name);
+    public String getHeaderObject(String name) {
+        String header = customHeaders.get(name);
 
         if(!Objects.isNull(header)){
             return header;
@@ -33,7 +33,7 @@ public class MutableHttpServletRequest extends HttpServletRequestWrapper {
     @Override
     public String getHeader(String name) {
         try{
-            String  header = customHeaders.get(name).toString();
+            String  header = customHeaders.get(name);
 
             if(header!=null){
                 return header;
@@ -64,11 +64,14 @@ public class MutableHttpServletRequest extends HttpServletRequestWrapper {
         Integer headerInt;
 
         try{
-            headerInt = (Integer)(customHeaders.get(name));
+            headerInt = Integer.parseInt(customHeaders.get(name));
         }catch (Exception ignore){
-            return 0;
+            return super.getIntHeader(name);
+        }
+        if (headerInt!=null){
+            return headerInt;
         }
 
-        return headerInt;
+        return super.getIntHeader(name);
     }
 }
