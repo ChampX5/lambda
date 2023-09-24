@@ -3,20 +3,22 @@ package com.lambda.primary.Objects.User;
 import lombok.Getter;
 
 @Getter
-public class AnonymousUser implements BaseUser{
-    private final String IPAddress;
+public class AnonymousUser extends BaseUser {
+    private String IPAddress;
+    public final int ANONYMOUS_USER_ID= -1;
 
-    public AnonymousUser(String ipAddress) {
-        IPAddress = ipAddress;
+
+    public AnonymousUser() {
+        super(
+                -1,
+                null,
+                null
+        );
     }
 
-    @Override
-    public boolean isAuthenticated(){
-        return false;
-    }
     @Override
     public String toString() {
-        return "anonymous";
+        return "AnonymousUser";
     }
 
 }
