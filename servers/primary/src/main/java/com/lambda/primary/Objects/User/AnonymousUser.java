@@ -12,8 +12,8 @@ public class AnonymousUser extends BaseUser {
         super(
                 -1,
                 null,
-                null
-        );
+                null,
+                "-1", "-1");
     }
 
     @Override

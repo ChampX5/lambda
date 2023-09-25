@@ -8,12 +8,16 @@ public class BaseUser implements BaseUserInterface{
     private final int userId;
     private final String username;
     private final String email;
+    private final String firstName;
+    private final String lastName;
 
 
-    public BaseUser(int userId, String username, String email) {
+    public BaseUser(int userId, String username, String email, String firstName, String lastName) {
         this.userId = userId;
         this.username = username;
         this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @Override
