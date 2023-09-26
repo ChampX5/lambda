@@ -2,25 +2,32 @@ package com.lambda.primary.Middlewares;
 
 
 import com.lambda.primary.Objects.Http.MutableHttpServletRequest;
+import com.lambda.primary.Services.AuthTokenServices;
 import com.lambda.primary.Services.UserServices;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-@Order(2)
+@Order(1)
 public class AuthenticationMiddleware implements Filter {
 
     @Value("${application.config.auth.keyword}")
     private String authKeyword;
 
-    @Autowired
+
     private UserServices userServices;
+    private AuthTokenServices authTokenServices;
+
+    @Autowired
+    public AuthenticationMiddleware(UserServices userServices, AuthTokenServices authTokenServices){
+        this.userServices = userServices;
+        this.authTokenServices = authTokenServices;
+    }
 
     /**
      *
@@ -36,9 +43,9 @@ public class AuthenticationMiddleware implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         //extracting the protocol type
         String requestProtocol = servletRequest.getProtocol();
-
         if(requestProtocol.equalsIgnoreCase("HTTP/1.1")){
             MutableHttpServletRequest httpRequest = new MutableHttpServletRequest((HttpServletRequest) servletRequest);
+            HttpServletRequest request = (HttpServletRequest)servletRequest;
 
             //extracting the header from the header list
             String authHeader = httpRequest.getHeader("Authorization");
@@ -53,13 +60,19 @@ public class AuthenticationMiddleware implements Filter {
             String authToken = authHeader.toLowerCase()
                     .trim().replaceFirst(authKeyword.toLowerCase(),"").trim();
             httpRequest.setHeader("serverAuth",authToken);
-            System.out.println(authToken);
+            String username = authTokenServices.fetchUsernameOnAuthToken(authToken.trim());
+            httpRequest.setHeader("user",username);
+            filterChain.doFilter(
+                    httpRequest,
+                    servletResponse
+            );
+            return;
 
         }
 
         //follows the execution
          filterChain.doFilter(
-                servletRequest,
+                 servletRequest,
                 servletResponse
         );
     }
