@@ -1,12 +1,15 @@
 package com.lambda.primary.Controllers.User;
 
 import com.lambda.primary.CoreExports.entities.User;
+import com.lambda.primary.Objects.User.BaseUser;
 import com.lambda.primary.Objects.User.Operations;
 import com.lambda.primary.Objects.User.UserRecord;
 import com.lambda.primary.Services.AuthTokenServices;
 import com.lambda.primary.Services.UserServices;
+import jakarta.servlet.http.HttpServletRequest;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
@@ -18,10 +21,13 @@ public class Authentication {
     @Autowired
     private Operations operations;
     @Autowired
-    UserServices userServices;
+    private UserServices userServices;
 
     @Autowired
-    AuthTokenServices authTokenServices;
+    private AuthTokenServices authTokenServices;
+
+    @Autowired
+    private ConversionService conversionService;
 
     @PostMapping
     public String authenticate(
@@ -53,6 +59,22 @@ public class Authentication {
         }
 
         return JSON.toString();
+    }
+
+    @GetMapping
+    public BaseUser authenticate(HttpServletRequest request){
+
+        System.out.println(request.getHeader("user"));
+
+        System.out.println(conversionService.convert(
+                request.getHeader("user"),
+                BaseUser.class
+        ).toString());
+
+        return conversionService.convert(
+                request.getHeader("user"),
+                BaseUser.class
+        );
     }
 
 }
