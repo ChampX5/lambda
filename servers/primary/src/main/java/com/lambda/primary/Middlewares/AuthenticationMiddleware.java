@@ -2,9 +2,12 @@ package com.lambda.primary.Middlewares;
 
 
 import com.lambda.primary.Objects.Http.MutableHttpServletRequest;
+import com.lambda.primary.Services.UserServices;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
@@ -15,6 +18,9 @@ public class AuthenticationMiddleware implements Filter {
 
     @Value("${application.config.auth.keyword}")
     private String authKeyword;
+
+    @Autowired
+    private UserServices userServices;
 
     /**
      *
@@ -46,11 +52,7 @@ public class AuthenticationMiddleware implements Filter {
             }
             String authToken = authHeader.toLowerCase()
                     .trim().replaceFirst(authKeyword.toLowerCase(),"").trim();
-
-            //extracting user associated with the token from database
-            /*
-                To be implemented
-            */
+            httpRequest.setHeader("serverAuth",authToken);
             System.out.println(authToken);
 
         }
