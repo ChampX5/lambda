@@ -25,7 +25,8 @@ public class AuthToken {
     private User user;
 
     @Column(
-            columnDefinition = "VARCHAR(100)"
+            columnDefinition = "VARCHAR(100)",
+            unique = true
     )
     private String token;
 
