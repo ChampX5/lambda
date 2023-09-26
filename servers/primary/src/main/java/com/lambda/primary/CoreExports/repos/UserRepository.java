@@ -1,6 +1,7 @@
 package com.lambda.primary.CoreExports.repos;
 
 import com.lambda.primary.CoreExports.entities.User;
+import com.lambda.primary.Objects.User.Permissions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,6 +22,12 @@ public interface UserRepository extends JpaRepository<User,Long>{
             nativeQuery = true
     )
     String queryPasswordFromUsername(@Param("usernameParse")String usernameParse);
+
+    @Query(
+            value = "SELECT permission FROM user WHERE username:usernameParse LIMIT 1",
+            nativeQuery = true
+    )
+    Permissions queryPermissionsFromUsername(@Param("usernameParse")String usernameParse);
 
 
 
