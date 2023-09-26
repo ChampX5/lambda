@@ -29,8 +29,18 @@ public class AuthTokenServices {
         authTokenRepository.save(
                 tokenObject
         );
+    }
 
+    public AuthToken fetchUserOnAuthToken(String authToken){
+        return authTokenRepository.queryAuthTokenFromToken(authToken);
+    }
 
+    public String fetchUsernameOnAuthToken(String authToken){
+        AuthToken token = authTokenRepository.queryAuthTokenFromToken(authToken);
+        if(token!=null){
+            return userServices.fetchUserOnUserId(token.getId()).getUsername();
+        }
+        return null;
     }
 
 
