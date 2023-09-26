@@ -6,10 +6,17 @@ import com.lambda.primary.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
-public class UserConverter implements Converter<String, BaseUser> {
+public class BaseUserConverter implements Converter<String, BaseUser> {
+
+
+
+
+    UserServices userServices;
 
     @Autowired
-    UserServices userServices;
+    public BaseUserConverter(UserServices userServices) {
+        this.userServices = userServices;
+    }
 
     @Override
     public BaseUser convert(String value) {
