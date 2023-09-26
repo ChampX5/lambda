@@ -10,7 +10,7 @@ public class AnonymousUser extends BaseUser {
 
     public AnonymousUser() {
         super(
-                -1,
+                -1L,
                 null,
                 null,
                 "-1", "-1");
