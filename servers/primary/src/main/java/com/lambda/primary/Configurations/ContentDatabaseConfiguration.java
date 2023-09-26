@@ -1,4 +1,4 @@
-package com.lambda.primary;
+package com.lambda.primary.Configurations;
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.Getter;

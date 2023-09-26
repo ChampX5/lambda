@@ -60,4 +60,8 @@ public class UserServices {
         userRepository.save(user);
     }
 
+    public Permissions getUserPermsByUsername(String username){
+        return userRepository.queryPermissionsFromUsername(username);
+    }
+
 }

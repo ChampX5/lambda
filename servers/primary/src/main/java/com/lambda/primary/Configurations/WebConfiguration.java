@@ -1,4 +1,4 @@
-package com.lambda.primary;
+package com.lambda.primary.Configurations;
 
 import com.lambda.primary.Objects.User.UserConverter;
 import org.springframework.context.annotation.Configuration;
