@@ -4,6 +4,7 @@ import com.lambda.primary.CoreExports.entities.AuthToken;
 import com.lambda.primary.CoreExports.entities.User;
 import com.lambda.primary.CoreExports.repos.AuthTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -43,6 +44,8 @@ public class AuthTokenServices {
         return null;
     }
 
-
-
+    @Modifying
+    public void deleteTokenOnId(Long Id){
+        authTokenRepository.queryDeleteTokenFromId(Id);
+    }
 }
