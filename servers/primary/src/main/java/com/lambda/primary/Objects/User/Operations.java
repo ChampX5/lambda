@@ -42,6 +42,12 @@ public class Operations {
         return null;
     }
 
+    /**
+     *
+     * @param user
+     * @return String -> authentication token
+     * @throws NoSuchAlgorithmException
+     */
     public String generateAuthToken(User user) throws NoSuchAlgorithmException {
         //Authenticating user
 
@@ -61,7 +67,7 @@ public class Operations {
 
     /**
      *
-     * @param registrationRecord
+     * @param registrationRecord registrationRecord
      * @return List<String>
      *     if null -> validation successful
      *     else -> validation unsuccessful returns list of unauthorized fields
@@ -97,6 +103,31 @@ public class Operations {
         return validationDeniedFields;
     }
 
+    /**
+     *
+     * @param username user
+     * @return boolean
+     *          :true: -> successful deletion of authtoken
+     *          :false:-> unsuccessful deletion of authtoken
+     */
+    public boolean deleteAuthToken(String username){
+        try{
+            Long userId = userServices.fetchIdOnUsername(username);
+            authTokenServices.deleteTokenOnId(userId);
+        }catch (Exception ignore){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param password
+     * @param username
+     * @return boolean
+     *          :true: -> authorized for token generation
+     *          :false: -> unauthorized for token generation
+     */
     private boolean preTokenGenerationTest(String password, String username){
         //Validates on existence of username in database
         if (!userServices.existsByUsername(username)) {
@@ -106,6 +137,7 @@ public class Operations {
         //validation on password matches
         return userServices.fetchPasswordOnUsername(username).equals(password);
     }
+
 
 
 }
