@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
@@ -69,6 +70,9 @@ public class User {
 
     @Column(columnDefinition = "DATETIME")
     private LocalDateTime joinedDate;
+
+    @ColumnDefault(value = "0")
+    private Boolean rememberUser;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AuthToken authToken;
