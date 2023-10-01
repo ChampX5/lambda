@@ -64,4 +64,9 @@ public class UserServices {
         return userRepository.queryPermissionsFromUsername(username);
     }
 
+    public Long fetchIdOnUsername(String username){
+        return userRepository.queryIdFromUsername(username);
+    }
+
+
 }
