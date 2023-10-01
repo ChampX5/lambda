@@ -7,10 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
 public class BaseUserConverter implements Converter<String, BaseUser> {
-
-
-
-
     UserServices userServices;
 
     @Autowired
@@ -31,7 +27,8 @@ public class BaseUserConverter implements Converter<String, BaseUser> {
                 user.getUsername(),
                 user.getEmail(),
                 user.getFirst_name(),
-                user.getLast_name());
+                user.getLast_name()
+        );
     }
 
 
