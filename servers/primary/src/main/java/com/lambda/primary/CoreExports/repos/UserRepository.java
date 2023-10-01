@@ -29,6 +29,10 @@ public interface UserRepository extends JpaRepository<User,Long>{
     )
     Permissions queryPermissionsFromUsername(@Param("usernameParse")String usernameParse);
 
+    @Query(
+        value = "SELECT Id FROM user WHERE username = :value LIMIT 1"
+    )
+    Long queryIdFromUsername(@Param("value") String username);
 
 
 }
