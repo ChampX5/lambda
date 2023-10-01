@@ -22,5 +22,9 @@ public interface AuthTokenRepository extends JpaRepository<AuthToken, Long> {
     )
     public List<AuthToken> queryIdFromToken(@Param("token") String token);
 
-
+    @Query(
+            value = "DELETE FROM authtoken WHERE Id=:value",
+            nativeQuery = true
+    )
+    void queryDeleteTokenFromId(@Param("value") Long Id);
 }
