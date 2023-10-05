@@ -3,7 +3,6 @@ package com.lambda.primary.Controllers.User;
 import com.lambda.primary.CoreExports.entities.User;
 import com.lambda.primary.Objects.User.BaseUser;
 import com.lambda.primary.Objects.User.Operations;
-import com.lambda.primary.Objects.User.RegistrationRecord;
 import com.lambda.primary.Objects.User.UserRecord;
 import com.lambda.primary.Services.AuthTokenServices;
 import com.lambda.primary.Services.UserServices;
@@ -18,7 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("user/auth/")
-public class Authentication {
+public class AuthenticationController {
 
     @Autowired
     private Operations operations;
