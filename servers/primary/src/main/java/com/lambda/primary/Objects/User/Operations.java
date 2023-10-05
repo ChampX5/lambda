@@ -18,12 +18,20 @@ import java.util.List;
 public class Operations {
 
     @Autowired
-    private PasswordEncoder encoder;
+    PasswordEncoder encoder;
     @Autowired
     private UserServices userServices;
     @Autowired
     private AuthTokenServices authTokenServices;
 
+    /**
+     * @param password
+     * @param username
+     * @return User
+     *          if null -> authentication failed
+     *          else -> successful authentication
+     * :: Authenticates requests on existence of username in database => password matches on registered username
+     */
     public User authenticate(String password, String username) {
         //Validates on existence of username in database
         if (!userServices.existsByUsername(username)) {
@@ -43,7 +51,6 @@ public class Operations {
     }
 
     /**
-     *
      * @param user
      * @return String -> authentication token
      * @throws NoSuchAlgorithmException
@@ -66,7 +73,6 @@ public class Operations {
 
 
     /**
-     *
      * @param registrationRecord registrationRecord
      * @return List<String>
      *     if null -> validation successful
@@ -95,7 +101,8 @@ public class Operations {
                     registrationRecord.firstName(),
                     registrationRecord.lastName(),
                     registrationRecord.telephone(),
-                    registrationRecord.email()
+                    registrationRecord.email(),
+                    registrationRecord.rememberUser()
             );
             return null;
         }
@@ -104,7 +111,6 @@ public class Operations {
     }
 
     /**
-     *
      * @param username user
      * @return boolean
      *          :true: -> successful deletion of authtoken
@@ -121,7 +127,6 @@ public class Operations {
     }
 
     /**
-     *
      * @param password
      * @param username
      * @return boolean
@@ -137,7 +142,4 @@ public class Operations {
         //validation on password matches
         return userServices.fetchPasswordOnUsername(username).equals(password);
     }
-
-
-
 }
