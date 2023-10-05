@@ -3,6 +3,7 @@ package com.lambda.primary.Controllers.User;
 import com.lambda.primary.CoreExports.entities.User;
 import com.lambda.primary.Objects.User.BaseUser;
 import com.lambda.primary.Objects.User.Operations;
+import com.lambda.primary.Objects.User.RegistrationRecord;
 import com.lambda.primary.Objects.User.UserRecord;
 import com.lambda.primary.Services.AuthTokenServices;
 import com.lambda.primary.Services.UserServices;
@@ -13,6 +14,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("user/auth/")
@@ -29,8 +31,8 @@ public class Authentication {
     @Autowired
     private ConversionService conversionService;
 
-    @PostMapping
-    public String authenticate(
+    @PostMapping()
+    public String LogIn(
             @RequestBody UserRecord record
     )  {
         JSONObject JSON = new JSONObject();
@@ -75,6 +77,23 @@ public class Authentication {
                 request.getHeader("user"),
                 BaseUser.class
         );
+    }
+
+    @PostMapping("logout/")
+    public String LogOut(
+            @RequestHeader Map<String,String> headers
+            ){
+        JSONObject JSON = new JSONObject();
+        String username = headers.get("user");
+        boolean status = operations.deleteAuthToken(username);
+
+        if(status){
+            JSON.put("status","success");
+        }else{
+            JSON.put("status", "exception");
+        }
+
+        return JSON.toString();
     }
 
 }

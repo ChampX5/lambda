@@ -3,11 +3,13 @@ package com.lambda.primary.CoreExports.repos;
 import com.lambda.primary.CoreExports.entities.User;
 import com.lambda.primary.Objects.User.Permissions;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -30,9 +32,17 @@ public interface UserRepository extends JpaRepository<User,Long>{
     Permissions queryPermissionsFromUsername(@Param("usernameParse")String usernameParse);
 
     @Query(
-        value = "SELECT Id FROM user WHERE username = :value LIMIT 1"
+        value = "SELECT UserId FROM user WHERE username = :value LIMIT 1",
+            nativeQuery = true
     )
     Long queryIdFromUsername(@Param("value") String username);
+
+
+    @Query(
+            value = "SELECT * FROM user",
+            nativeQuery = true
+    )
+    List<User> queryAllUsers();
 
 
 }
