@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,7 +46,7 @@ public class UserServices {
 
     public void addUser(
             String username, String password,String firstName,
-            String lastName, Long telephone, String email){
+            String lastName, Long telephone, String email, boolean rememberUser){
         User user = User.builder()
                 .userPermission(Permissions.IS_USER)
                 .last_name(lastName)
@@ -55,6 +56,7 @@ public class UserServices {
                 .password(password)
                 .username(username)
                 .email(email)
+                .rememberUser(rememberUser)
                 .build();
 
         userRepository.save(user);
@@ -66,6 +68,10 @@ public class UserServices {
 
     public Long fetchIdOnUsername(String username){
         return userRepository.queryIdFromUsername(username);
+    }
+
+    public List<User> fetchAllUsers(){
+        return this.userRepository.queryAllUsers();
     }
 
 
