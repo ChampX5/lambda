@@ -1,7 +1,7 @@
 package com.lambda.primary.Controllers.User;
 
 import com.lambda.primary.Objects.User.Operations;
-import com.lambda.primary.Objects.User.RegistrationRecord;
+import com.lambda.primary.Models.User.RegistrationModel;
 import com.lambda.primary.Services.UserServices;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class RegistrationController {
 
     @PostMapping
     public String register(
-            @RequestBody RegistrationRecord record
+            @RequestBody RegistrationModel record
     ) {
         List<String> validateFields = userOperations.validateRegistration(record);
         if (validateFields != null) {

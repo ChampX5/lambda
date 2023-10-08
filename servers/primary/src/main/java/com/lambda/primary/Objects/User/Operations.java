@@ -1,6 +1,7 @@
 package com.lambda.primary.Objects.User;
 
 import com.lambda.primary.CoreExports.entities.User;
+import com.lambda.primary.Models.User.RegistrationModel;
 import com.lambda.primary.Services.AuthTokenServices;
 import com.lambda.primary.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.security.SecureRandomParameters;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -80,7 +80,7 @@ public class Operations {
      *
      * ::Validates registration and adds the user to the database
      */
-    public List<String> validateRegistration(RegistrationRecord registrationRecord) {
+    public List<String> validateRegistration(RegistrationModel registrationRecord) {
         List<String> validationDeniedFields = new ArrayList<>();
 
         String email = registrationRecord.email();

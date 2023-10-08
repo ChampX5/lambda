@@ -1,7 +1,7 @@
-package com.lambda.primary.Objects.User;
+package com.lambda.primary.Models.User;
 
 
-public record RegistrationRecord(
+public record RegistrationModel(
         String username,
         String password,
         String email,

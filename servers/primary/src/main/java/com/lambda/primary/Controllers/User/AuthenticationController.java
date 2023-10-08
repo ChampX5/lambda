@@ -3,7 +3,7 @@ package com.lambda.primary.Controllers.User;
 import com.lambda.primary.CoreExports.entities.User;
 import com.lambda.primary.Objects.User.BaseUser;
 import com.lambda.primary.Objects.User.Operations;
-import com.lambda.primary.Objects.User.UserRecord;
+import com.lambda.primary.Models.User.UserModel;
 import com.lambda.primary.Services.AuthTokenServices;
 import com.lambda.primary.Services.UserServices;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +32,7 @@ public class AuthenticationController {
 
     @PostMapping()
     public String LogIn(
-            @RequestBody UserRecord record
+            @RequestBody UserModel record
     )  {
         JSONObject JSON = new JSONObject();
 
