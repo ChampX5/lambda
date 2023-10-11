@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .password-heading {
+        background: rgba(255 255 255 / 0.4);
+        border: 1px solid rgba(255 255 255 / 05);
+        @apply text-xl font-semibold px-16 py-4 rounded-xl border-white-main;
+    }
+
+    .password-row-element {
+        background: rgba(255 255 255 / 0.2);
+        @apply px-3 rounded-lg text-center;
+    }
+}
