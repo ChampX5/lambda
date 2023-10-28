@@ -13,4 +13,10 @@
         background: rgba(255 255 255 / 0.2);
         @apply px-3 rounded-lg text-center;
     }
+
+    .calc-button {
+        background: rgba(255, 255, 255, 0.3);
+        box-sizing: border-box;
+        @apply grid place-items-center rounded-xl aspect-square w-12 cursor-pointer text-xl;
+    }
 }
