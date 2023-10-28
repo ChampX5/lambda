@@ -22,7 +22,7 @@ interface SidebarIconPropsType {
 const SidebarIcon = ({ icon, sidebarOpen }: SidebarIconPropsType) => {
     return (
         <div
-            className={`w-5 h-5 flex justify-center items-center ${
+            className={`w-5 h-5 flex justify-center items-center text-3xl ${
                 sidebarOpen && 'mr-4'
             } transition-[margin-right] duration-300`}
         >
@@ -104,25 +104,31 @@ const Sidebar = () => {
     return (
         <div
             className={`${
-                sidebarOpen ? 'w-1/6' : 'w-23'
-            } bg-slate-100 relative p-4 flex box-content flex-col gap-3 items-center transition-all duration-300 ease-in-out`}
+                sidebarOpen
+                    ? 'w-72 bg-slate-100 text-black'
+                    : 'bg-transparent text-transparent'
+            } lg:bg-slate-100 lg:text-black p-4 fixed lg:relative box-content h-screen transition-all duration-300 ease-in-out`}
         >
             <div
-                className={`absolute top-6 -right-5 bg-gray-200 text-3xl rounded-full cursor-pointer transition-all duration-300
-                ${sidebarOpen && 'rotate-180'}
+                className={`${
+                    !sidebarOpen && 'left-2 text-black'
+                } absolute lg:top-2 lg:left-auto lg:-right-4 bg-gray-200 text-3xl rounded-full cursor-pointer transition-all duration-300
+                ${sidebarOpen && 'rotate-180 -right-4'}
             `}
                 onClick={() => setSidebarOpen(!sidebarOpen)}
             >
                 <BiRightArrowCircle />
             </div>
-            {sidebarItems.map((link) => (
-                <SidebarButton
-                    sidebarOpen={sidebarOpen}
-                    url={link.url}
-                    icon={link.icon}
-                    text={link.text}
-                />
-            ))}
+            <div className='flex flex-col gap-3'>
+                {sidebarItems.map((link) => (
+                    <SidebarButton
+                        sidebarOpen={sidebarOpen}
+                        url={link.url}
+                        icon={link.icon}
+                        text={link.text}
+                    />
+                ))}
+            </div>
         </div>
     );
 };
