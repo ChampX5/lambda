@@ -18,7 +18,7 @@ interface Company {
 
 const Passwords = () => {
     const [sidebarOpen, setSidebarOpen] = useContext(SidebarContext);
-    
+
     // const [passwords, setPasswords] = useState([]);
 
     // useEffect(() => {
@@ -131,9 +131,9 @@ const Passwords = () => {
             username: 'ChampX5',
             password: '12341234',
             platform: {
-                name: 'Wikipedia',
+                name: 'Chess',
                 imageUrl:
-                    'https://www.wikipedia.org/static/apple-touch/wikipedia.png'
+                    'https://www.chess.com/bundles/web/favicons/apple-touch-icon.7aaa2d1f.png'
             }
         }
     ];
@@ -187,7 +187,7 @@ const Passwords = () => {
                         </div>
 
                         {/* password buttons */}
-                        <div className='mt-6 flex justify-around w-full'>
+                        {/* <div className='mt-6 flex justify-around w-full'>
                             <button
                                 className='rounded-lg bg-blue-500 text-white-main px-3 py-2 text-sm text-center uppercase font-[Montserrat]'
                                 onClick={() => {
@@ -201,7 +201,7 @@ const Passwords = () => {
                             <button className='rounded-lg bg-slate-50 border-slate-200 border-2 border-solid px-2 py-1 text-xs text-center uppercase font-[Montserrat]'>
                                 View Password
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 ))}
             </div>
