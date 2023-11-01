@@ -1,6 +1,9 @@
 // import { useState, useEffect } from 'react';
 
-import { Header } from "../components";
+import { Header } from '../components';
+
+import { useContext } from 'react';
+import { SidebarContext } from '../App';
 
 interface PasswordObjectType {
     platform: Company;
@@ -14,6 +17,8 @@ interface Company {
 }
 
 const Passwords = () => {
+    const [sidebarOpen, setSidebarOpen] = useContext(SidebarContext);
+    
     // const [passwords, setPasswords] = useState([]);
 
     // useEffect(() => {
@@ -135,9 +140,13 @@ const Passwords = () => {
 
     return (
         <>
-            <Header title="My Passwords" type="Manager" />
+            <Header title='My Passwords' type='Manager' />
 
-            <div className='grid w-full xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 gap-x-3 gap-y-3 px-3'>
+            <div
+                className={`grid w-full xl:grid-cols-3 lg:grid-cols-2 ${
+                    sidebarOpen ? 'md:grid-cols-1' : 'md:grid-cols-2'
+                } gap-x-3 gap-y-3 px-3`}
+            >
                 {passwords.map((password) => (
                     <div className='rounded-lg border-gray-200 border-2 border-solid p-3'>
                         {/* company bar */}
@@ -179,7 +188,14 @@ const Passwords = () => {
 
                         {/* password buttons */}
                         <div className='mt-6 flex justify-around w-full'>
-                            <button className='rounded-lg bg-blue-500 text-white-main px-3 py-2 text-sm text-center uppercase font-[Montserrat]'>
+                            <button
+                                className='rounded-lg bg-blue-500 text-white-main px-3 py-2 text-sm text-center uppercase font-[Montserrat]'
+                                onClick={() => {
+                                    navigator.clipboard.writeText(
+                                        password.password
+                                    );
+                                }}
+                            >
                                 Copy Password
                             </button>
                             <button className='rounded-lg bg-slate-50 border-slate-200 border-2 border-solid px-2 py-1 text-xs text-center uppercase font-[Montserrat]'>

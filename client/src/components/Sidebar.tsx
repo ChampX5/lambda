@@ -10,7 +10,8 @@ import {
 
 import { BiRightArrowCircle } from 'react-icons/bi';
 
-import { useState } from 'react';
+import { useContext } from 'react';
+import { SidebarContext } from '../App';
 
 import { Link } from 'react-router-dom';
 
@@ -22,9 +23,9 @@ interface SidebarIconPropsType {
 const SidebarIcon = ({ icon, sidebarOpen }: SidebarIconPropsType) => {
     return (
         <div
-            className={`w-5 h-5 flex justify-center items-center text-3xl ${
-                sidebarOpen && 'mr-4'
-            } transition-[margin-right] duration-300`}
+            className={`${
+                sidebarOpen ? 'mr-3' : 'mr-0'
+            } transition-[margin-right] text-lg md:text-2xl`}
         >
             {icon}
         </div>
@@ -45,13 +46,18 @@ const SidebarButton = ({
     sidebarOpen
 }: SidebarButtonPropsType) => {
     return (
-        <Link to={url} className='w-full'>
-            <div className='w-full flex font-semibold p-4 px-5 justify-start items-center rounded-xl hover:bg-blue-300 hover:text-white-main cursor-pointer transition-all duration-300'>
+        <Link to={url}>
+            <div
+                className={`p-5 py-4 flex justify-start items-center rounded-xl mb-3 hover:bg-blue-300 hover:text-white-main transition-all duration-300`}
+            >
                 <SidebarIcon icon={icon} sidebarOpen={sidebarOpen} />
+
                 <div
                     className={`${
-                        !sidebarOpen ? 'w-0 h-0 invisible' : ''
-                    } transition-[transform] duration-300`}
+                        sidebarOpen
+                            ? 'opacity-1 pointer-events-auto'
+                            : 'opacity-0 pointer-events-none'
+                    } transition-opacity duration-300 whitespace-nowrap font-semibold`}
                 >
                     {text}
                 </div>
@@ -61,7 +67,7 @@ const SidebarButton = ({
 };
 
 const Sidebar = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useContext(SidebarContext);
 
     const sidebarItems = [
         {
@@ -105,21 +111,21 @@ const Sidebar = () => {
         <div
             className={`${
                 sidebarOpen
-                    ? 'w-72 bg-slate-100 text-black'
-                    : 'bg-transparent text-transparent'
-            } lg:bg-slate-100 lg:text-black p-4 fixed lg:relative box-content h-screen transition-all duration-300 ease-in-out`}
+                    ? 'w-72 bg-slate-100'
+                    : 'md:w-[5.5rem] w-0 text-transparent pointer-events-none md:pointer-events-auto md:text-black'
+            } fixed top-0 left-0 md:bg-slate-100 h-screen transition-all duration-300 px-3 pt-3`}
         >
             <div
                 className={`${
-                    !sidebarOpen && 'left-2 text-black'
-                } absolute lg:top-2 lg:left-auto lg:-right-4 bg-gray-200 text-3xl rounded-full cursor-pointer transition-all duration-300
-                ${sidebarOpen && 'rotate-180 -right-4'}
-            `}
-                onClick={() => setSidebarOpen(!sidebarOpen)}
+                    sidebarOpen ? 'rotate-180' : 'rotate-0'
+                } rounded-full text-3xl absolute top-3 md:top-6 text-black pointer-events-auto -right-3 transition-all duration-300 ease-in-out`}
             >
-                <BiRightArrowCircle />
+                <BiRightArrowCircle
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                />
             </div>
-            <div className='flex flex-col gap-3'>
+
+            <div>
                 {sidebarItems.map((link) => (
                     <SidebarButton
                         sidebarOpen={sidebarOpen}
