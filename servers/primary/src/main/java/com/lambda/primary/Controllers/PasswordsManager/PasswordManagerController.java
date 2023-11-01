@@ -46,7 +46,6 @@ public class PasswordManagerController {
             @RequestBody ObjectNode bodyObject
             ){
 
-
         JsonNode JSON =  bodyObject.get("pwds_list");
         System.out.println(JSON.toString());
        Iterator<JsonNode> JSONIterator =

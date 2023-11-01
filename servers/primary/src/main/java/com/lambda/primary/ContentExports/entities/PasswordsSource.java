@@ -17,6 +17,17 @@ import java.time.LocalDateTime;
 @Builder
 public class PasswordsSource {
 
+    public PasswordsSource(
+            String username,
+            String password,
+            Long user
+    ){
+        this.username = username;
+        this.password = password;
+        this.user = user;
+    }
+
+
     @Id
     @SequenceGenerator(
             name = "PwdSrc_seq",
