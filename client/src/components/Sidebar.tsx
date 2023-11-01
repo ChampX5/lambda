@@ -10,7 +10,7 @@ import {
 
 import { BiRightArrowCircle } from 'react-icons/bi';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { SidebarContext } from '../App';
 
 import { Link } from 'react-router-dom';
@@ -33,22 +33,33 @@ const SidebarIcon = ({ icon, sidebarOpen }: SidebarIconPropsType) => {
 };
 
 interface SidebarButtonPropsType {
-    text: String;
+    text: string;
     icon: JSX.Element;
     url: string;
     sidebarOpen: boolean;
+    selectedTab: string;
+    setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const SidebarButton = ({
     text,
     icon,
     url,
-    sidebarOpen
+    sidebarOpen,
+    selectedTab,
+    setSelectedTab
 }: SidebarButtonPropsType) => {
     return (
-        <Link to={url}>
+        <Link
+            to={url}
+            onClick={() => {
+                setSelectedTab(url);
+            }}
+        >
             <div
-                className={`p-5 py-4 flex justify-start items-center rounded-xl mb-3 hover:bg-blue-300 hover:text-white-main transition-all duration-300`}
+                className={`${
+                    url === selectedTab ? 'bg-blue-200' : 'bg-transparent'
+                } p-5 py-4 flex justify-start items-center rounded-xl mb-3 hover:bg-blue-300 hover:text-white-main transition-all duration-300`}
             >
                 <SidebarIcon icon={icon} sidebarOpen={sidebarOpen} />
 
@@ -68,6 +79,7 @@ const SidebarButton = ({
 
 const Sidebar = () => {
     const [sidebarOpen, setSidebarOpen] = useContext(SidebarContext);
+    const [selectedTab, setSelectedTab] = useState('/');
 
     const sidebarItems = [
         {
@@ -118,7 +130,7 @@ const Sidebar = () => {
             <div
                 className={`${
                     sidebarOpen ? 'rotate-180' : 'rotate-0'
-                } rounded-full text-3xl absolute top-3 md:top-6 text-black pointer-events-auto -right-3 transition-all duration-300 ease-in-out`}
+                } rounded-full text-3xl absolute top-3 md:top-6 text-black pointer-events-auto -right-3 transition-all duration-300 ease-in-out cursor-pointer`}
             >
                 <BiRightArrowCircle
                     onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -132,6 +144,8 @@ const Sidebar = () => {
                         url={link.url}
                         icon={link.icon}
                         text={link.text}
+                        selectedTab={selectedTab}
+                        setSelectedTab={setSelectedTab}
                     />
                 ))}
             </div>
