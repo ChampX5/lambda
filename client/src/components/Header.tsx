@@ -9,7 +9,7 @@ const Header = (props: HeaderProps) => {
             <div className='text-3xl font-semibold md:ml-20 mt-6 text-center md:text-left'>
                 {props.title}
             </div>
-            <div className='md:ml-20 mt-1 mb-6 text-center md:text-left text-base uppercase text-white-800 font-[Montserrat]'>
+            <div className='md:ml-20 mt-1 mb-6 text-center md:text-left text-base uppercase text-white-700 font-[Montserrat]'>
                 {props.type}
             </div>
         </>

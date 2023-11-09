@@ -186,22 +186,8 @@ const Passwords = () => {
                             </span>
                         </div>
 
-                        {/* password buttons */}
-                        {/* <div className='mt-6 flex justify-around w-full'>
-                            <button
-                                className='rounded-lg bg-blue-500 text-white-main px-3 py-2 text-sm text-center uppercase font-[Montserrat]'
-                                onClick={() => {
-                                    navigator.clipboard.writeText(
-                                        password.password
-                                    );
-                                }}
-                            >
-                                Copy Password
-                            </button>
-                            <button className='rounded-lg bg-slate-50 border-slate-200 border-2 border-solid px-2 py-1 text-xs text-center uppercase font-[Montserrat]'>
-                                View Password
-                            </button>
-                        </div> */}
+                        {/* passwords - modal to open up */}
+
                     </div>
                 ))}
             </div>
