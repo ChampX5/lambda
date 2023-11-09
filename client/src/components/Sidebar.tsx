@@ -8,6 +8,8 @@ import {
     FaCalendar
 } from 'react-icons/fa';
 
+import logo from '../img/logo.svg';
+
 import { BiRightArrowCircle } from 'react-icons/bi';
 
 import { useContext, useState } from 'react';
@@ -58,7 +60,11 @@ const SidebarButton = ({
         >
             <div
                 className={`${
-                    url === selectedTab ? 'bg-blue-200' : 'bg-transparent'
+                    url === selectedTab
+                        ? sidebarOpen
+                            ? 'bg-blue-200'
+                            : 'md:bg-blue-200'
+                        : 'bg-transparent'
                 } p-5 py-4 flex justify-start items-center rounded-xl mb-3 hover:bg-blue-300 hover:text-white-main transition-all duration-300`}
             >
                 <SidebarIcon icon={icon} sidebarOpen={sidebarOpen} />
@@ -138,6 +144,37 @@ const Sidebar = () => {
             </div>
 
             <div>
+                <Link
+                    to='/'
+                    onClick={() => {
+                        setSelectedTab('/');
+                    }}
+                >
+                    <div
+                        className={`px-2 flex justify-start items-center rounded-xl mb-3 transition-all duration-300`}
+                    >
+                        <span
+                            className={`${
+                                sidebarOpen ? 'mr-3' : 'mr-0'
+                            } transition-[margin-right]`}
+                        >
+                            <img src={logo} alt="lg" className={`h-12 aspect-square`} />
+                        </span>
+
+                        <span
+                            className={`${
+                                sidebarOpen
+                                    ? 'opacity-1 w-32 pointer-events-auto'
+                                    : 'opacity-0 w-0 pointer-events-none'
+                            } transition-all duration-300 whitespace-nowrap font-[Helvetica] font-semibold text-3xl`}
+                        >
+                            L&lambda;MBD&lambda;
+                        </span>
+                    </div>
+                </Link>
+
+                <hr className="w-full mb-3 border-slate-300" />
+
                 {sidebarItems.map((link) => (
                     <SidebarButton
                         sidebarOpen={sidebarOpen}
