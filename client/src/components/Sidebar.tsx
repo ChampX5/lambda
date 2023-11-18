@@ -136,7 +136,7 @@ const Sidebar = () => {
             <div
                 className={`${
                     sidebarOpen ? 'rotate-180' : 'rotate-0'
-                } rounded-full text-3xl absolute top-3 md:top-6 text-black pointer-events-auto -right-3 transition-all duration-300 ease-in-out cursor-pointer`}
+                } rounded-full text-3xl absolute top-3 md:top-6 text-black pointer-events-auto -right-3 transition-all duration-300 delay-200 ease-in-out cursor-pointer`}
             >
                 <BiRightArrowCircle
                     onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -158,7 +158,11 @@ const Sidebar = () => {
                                 sidebarOpen ? 'mr-3' : 'mr-0'
                             } transition-[margin-right]`}
                         >
-                            <img src={logo} alt="lg" className={`h-12 aspect-square`} />
+                            <img
+                                src={logo}
+                                alt='lg'
+                                className={`h-12 aspect-square`}
+                            />
                         </span>
 
                         <span
@@ -166,14 +170,14 @@ const Sidebar = () => {
                                 sidebarOpen
                                     ? 'opacity-1 w-32 pointer-events-auto'
                                     : 'opacity-0 w-0 pointer-events-none'
-                            } transition-all duration-300 whitespace-nowrap font-[Helvetica] font-semibold text-3xl`}
+                            } transition-all duration-300 whitespace-nowrap font-[Nunito] font-semibold text-3xl`}
                         >
-                            L&lambda;MBD&lambda;
+                            LAMBDA
                         </span>
                     </div>
                 </Link>
 
-                <hr className="w-full mb-3 border-slate-300" />
+                <hr className='w-full mb-3 border-slate-300' />
 
                 {sidebarItems.map((link) => (
                     <SidebarButton
