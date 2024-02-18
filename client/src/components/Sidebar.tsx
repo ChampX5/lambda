@@ -26,8 +26,8 @@ const SidebarIcon = ({ icon, sidebarOpen }: SidebarIconPropsType) => {
     return (
         <div
             className={`${
-                sidebarOpen ? 'mr-3' : 'mr-0'
-            } transition-[margin-right] text-lg md:text-2xl`}
+                sidebarOpen ? 'mr-3' : 'mr-0 opacity-0 md:opacity-100'
+            } transition-all duration-300 text-lg md:text-2xl`}
         >
             {icon}
         </div>
@@ -72,7 +72,7 @@ const SidebarButton = ({
                 <div
                     className={`${
                         sidebarOpen
-                            ? 'opacity-1 pointer-events-auto'
+                            ? 'opacity-100 pointer-events-auto'
                             : 'opacity-0 pointer-events-none'
                     } transition-opacity duration-300 whitespace-nowrap font-semibold`}
                 >
@@ -119,7 +119,7 @@ const Sidebar = () => {
             icon: <FaLock />
         },
         {
-            url: '/calender',
+            url: '/calendar',
             text: 'Your Events',
             icon: <FaCalendar />
         }
@@ -168,7 +168,7 @@ const Sidebar = () => {
                         <span
                             className={`${
                                 sidebarOpen
-                                    ? 'opacity-1 w-32 pointer-events-auto'
+                                    ? 'opacity-100 w-32 pointer-events-auto'
                                     : 'opacity-0 w-0 pointer-events-none'
                             } transition-all duration-300 whitespace-nowrap font-[Nunito] font-semibold text-3xl`}
                         >
@@ -184,6 +184,7 @@ const Sidebar = () => {
                         sidebarOpen={sidebarOpen}
                         url={link.url}
                         icon={link.icon}
+                        key={link.text}
                         text={link.text}
                         selectedTab={selectedTab}
                         setSelectedTab={setSelectedTab}

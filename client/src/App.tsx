@@ -5,6 +5,11 @@ import { Passwords, Main } from './pages';
 
 import { useState, createContext, useContext } from 'react';
 import React from 'react';
+import Calculator from './pages/Calculator';
+import Times from './pages/Time';
+import Weather from './pages/Weather';
+import Currency from './pages/Currency';
+import Events from './pages/Events';
 
 export const SidebarContext = createContext<
     [boolean, React.Dispatch<React.SetStateAction<boolean>>]
@@ -37,6 +42,26 @@ const App = () => {
                                         <Route
                                             path='/passwords'
                                             element={<Passwords />}
+                                        />
+                                        <Route
+                                            path='/calc'
+                                            element={<Calculator />}
+                                        />
+                                        <Route
+                                            path='/time'
+                                            element={<Times />}
+                                        />
+                                        <Route
+                                            path='/weather'
+                                            element={<Weather />}
+                                        />
+                                        <Route
+                                            path='/currency'
+                                            element={<Currency />}
+                                        />
+                                        <Route
+                                            path='/calendar'
+                                            element={<Events />}
                                         />
                                     </Routes>
                                 </div>
