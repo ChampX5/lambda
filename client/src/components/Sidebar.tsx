@@ -27,7 +27,7 @@ const SidebarIcon = ({ icon, sidebarOpen }: SidebarIconPropsType) => {
         <div
             className={`${
                 sidebarOpen ? 'mr-3' : 'mr-0 opacity-0 md:opacity-100'
-            } transition-all duration-300 text-lg md:text-2xl`}
+            } transition-[margin] duration-300 text-lg md:text-2xl`}
         >
             {icon}
         </div>

@@ -19,7 +19,7 @@ interface Company {
 }
 
 const Passwords = () => {
-    const [sidebarOpen, _] = useContext(SidebarContext);
+    const [sidebarOpen] = useContext(SidebarContext);
 
     const [passwords, setPasswords] = useState<PasswordObjectType[]>([]);
 
@@ -60,6 +60,7 @@ const Passwords = () => {
                             <img
                                 src={password.platform.imageUrl}
                                 className='w-12 rounded-2xl'
+                                alt={password.platform.name}
                             />
 
                             <span className='font-semibold'>
